@@ -20,101 +20,97 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const [isOrdering, setIsOrdering] = useState(false);
 
-  // Check if it's weekend (Saturday = 6, Sunday = 0)
+  // Check if today is a weekend day
   const isWeekend = () => {
-    const day = new Date().getDay();
-    return day === 0 || day === 6;
+    const today = new Date().getDay();
+    return today === 0 || today === 6; // Sunday or Saturday
   };
 
-  const handleWhatsAppOrder = () => {
+  const handleOrderClick = () => {
     if (isWeekend()) return;
 
     setIsOrdering(true);
 
-    const message = `Hi! I'd like to pre-order:
+    // Format WhatsApp message
+    const message = `Hello! I want to pre-order:
+  ${product.name}
+  $${product.price}
 
-📦 ${product.name}
-💰 $${product.price}
+Can you confirm availability and delivery? Thanks!`;
 
-Please confirm availability and delivery details. Thank you!`;
-
-    const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(
+    const waUrl = `https://wa.me/1234567890?text=${encodeURIComponent(
       message
     )}`;
 
-    // Simulate brief loading state for better UX
+    // Add a slight delay for UX feedback
     setTimeout(() => {
-      window.open(whatsappUrl, "_blank");
+      window.open(waUrl, "_blank");
       setIsOrdering(false);
-    }, 500);
+    }, 600);
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
+    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-100 overflow-hidden">
       {/* Product Image */}
-      <div className="relative h-64 bg-gray-50">
+      <div className="relative h-60 bg-gray-100">
         <Image
-          src={product.image || "/placeholder.svg"}
+          src={product.image || "/images/fallback.jpg"}
           alt={product.name}
           fill
-          className="object-cover"
+          className="object-cover object-center"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
 
-      {/* Product Info */}
-      <div className="p-6 space-y-4">
-        <div className="space-y-2">
-          <h3 className="text-xl font-bold text-gray-900 leading-tight">
+      {/* Product Details */}
+      <div className="p-5 space-y-3">
+        <div>
+          <h3 className="text-xl font-semibold text-gray-800">
             {product.name}
           </h3>
-          <p className="text-lg text-gray-600 leading-relaxed">
-            {product.description}
-          </p>
+          <p className="mt-1 text-gray-600 text-sm">{product.description}</p>
         </div>
 
-        <div className="flex items-center justify-between">
-          <span className="text-3xl font-bold text-orange-600">
+        <div className="flex justify-between items-center">
+          <span className="text-2xl font-bold text-orange-500">
             ${product.price}
           </span>
-          <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+          <span className="text-xs bg-gray-200 px-2 py-1 rounded-full text-gray-600">
             {product.category}
           </span>
         </div>
 
-        {/* Order Button */}
+        {/* Order Button or Weekend Notice */}
         {isWeekend() ? (
-          <div className="space-y-3">
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-center">
-              <p className="text-amber-800 font-medium">Weekend Break 🌻</p>
-              <p className="text-amber-700 text-sm mt-1">
-                We&apos;re taking a rest! Orders resume Monday.
-              </p>
-            </div>
+          <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-md text-center">
+            <p className="text-yellow-800 font-medium">Closed on Weekends</p>
+            <p className="text-yellow-700 text-xs mt-1">
+              Back to orders on Monday!
+            </p>
           </div>
         ) : (
           <button
-            onClick={handleWhatsAppOrder}
+            onClick={handleOrderClick}
             disabled={isOrdering}
-            className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 text-lg min-h-[56px] shadow-lg hover:shadow-xl"
+            className="w-full bg-green-500 text-white font-semibold py-3 px-5 rounded-lg hover:bg-green-600 disabled:bg-green-300 flex items-center justify-center gap-2 transition-colors duration-150 min-h-[48px]"
             aria-label={`Order ${product.name} via WhatsApp`}
           >
             {isOrdering ? (
               <>
-                <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
-                Opening WhatsApp...
+                <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+                Connecting to WhatsApp...
               </>
             ) : (
               <>
-                <MessageCircle className="h-6 w-6" />
-                Order via WhatsApp
+                <MessageCircle className="w-5 h-5" />
+                Order Now
               </>
             )}
           </button>
         )}
 
-        <p className="text-sm text-gray-500 text-center">
-          No registration needed • Instant ordering
+        <p className="text-center text-gray-500 text-xs">
+          No sign-up required • Quick ordering
         </p>
       </div>
     </div>

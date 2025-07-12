@@ -9,9 +9,8 @@ const products = [
     name: "Nasi Goreng Spesial",
     price: 25,
     image:
-      "https://preview-accessible-storefront-kzmnocumnx7ckgy6exrn.vusercontent.net/placeholder.svg?height=300&width=300",
-    description:
-      "Nasi Goreng Spesial dengan bumbu rahasia dan bahan berkualitas tinggi.",
+      "https://okutimurpos.bacakoran.co/upload/0e2a0c221312f77847683427dc7bdfaa.jpg",
+    description: "Nasi goreng dengan bumbu spesial dan bahan segar pilihan.",
     category: "Makanan",
   },
   {
@@ -19,18 +18,17 @@ const products = [
     name: "Nasi Uduk",
     price: 18,
     image:
-      "https://preview-accessible-storefront-kzmnocumnx7ckgy6exrn.vusercontent.net/placeholder.svg?height=300&width=300",
-    description: "Nasi Uduk dengan santan kelapa yang kaya dan bumbu khas.",
+      "https://okutimurpos.bacakoran.co/upload/0e2a0c221312f77847683427dc7bdfaa.jpg",
+    description: "Nasi uduk harum dengan santan asli dan rempah khas.",
     category: "Makanan",
   },
   {
     id: 3,
     name: "Ayam Goreng Kalasan",
     price: 12,
-    image:
-      "https://preview-accessible-storefront-kzmnocumnx7ckgy6exrn.vusercontent.net/placeholder.svg?height=300&width=300",
+    image: "/images/ayam-kalasan.jpg",
     description:
-      "Ayam Goreng Kalasan dengan bumbu rempah yang kaya dan rasa yang menggugah selera.",
+      "https://okutimurpos.bacakoran.co/upload/0e2a0c221312f77847683427dc7bdfaa.jpg",
     category: "Pedas",
   },
   {
@@ -38,9 +36,8 @@ const products = [
     name: "Ayam Gepuk",
     price: 15,
     image:
-      "https://preview-accessible-storefront-kzmnocumnx7ckgy6exrn.vusercontent.net/placeholder.svg?height=300&width=300",
-    description:
-      "Ayam Gepuk dengan bumbu khas yang pedas dan menggugah selera.",
+      "https://okutimurpos.bacakoran.co/upload/0e2a0c221312f77847683427dc7bdfaa.jpg",
+    description: "Ayam gepuk pedas dengan sambal khas yang nendang.",
     category: "Pedas",
   },
   {
@@ -48,9 +45,8 @@ const products = [
     name: "Sate Babi",
     price: 22,
     image:
-      "https://preview-accessible-storefront-kzmnocumnx7ckgy6exrn.vusercontent.net/placeholder.svg?height=300&width=300",
-    description:
-      "Sate Babi dengan bumbu kacang yang kaya rasa dan daging yang empuk.",
+      "https://okutimurpos.bacakoran.co/upload/0e2a0c221312f77847683427dc7bdfaa.jpg",
+    description: "Sate babi empuk dengan bumbu kacang kental nan lezat.",
     category: "Sate",
   },
   {
@@ -58,9 +54,8 @@ const products = [
     name: "Sate Ayam",
     price: 16,
     image:
-      "https://preview-accessible-storefront-kzmnocumnx7ckgy6exrn.vusercontent.net/placeholder.svg?height=300&width=300",
-    description:
-      "Sate Ayam dengan bumbu kacang yang lezat dan daging ayam yang empuk.",
+      "https://okutimurpos.bacakoran.co/upload/0e2a0c221312f77847683427dc7bdfaa.jpg",
+    description: "Sate ayam juicy dengan saus kacang yang nikmat.",
     category: "Sate",
   },
 ];
@@ -68,63 +63,65 @@ const products = [
 export function ProductGrid() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-  const categories = Array.from(new Set(products.map((p) => p.category)));
+  // Get unique categories from products
+  const categories = [...new Set(products.map((item) => item.category))];
 
-  const toggleCategory = (category: string) => {
+  const handleCategoryToggle = (category: string) => {
     setSelectedCategories((prev) =>
       prev.includes(category)
-        ? prev.filter((c) => c !== category)
+        ? prev.filter((cat) => cat !== category)
         : [...prev, category]
     );
   };
 
-  const filteredProducts =
+  // Filter products based on selected categories
+  const displayedProducts =
     selectedCategories.length === 0
       ? products
-      : products.filter((p) => selectedCategories.includes(p.category));
+      : products.filter((item) => selectedCategories.includes(item.category));
 
   return (
-    <section className="space-y-8">
-      <div className="text-center space-y-4">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-          Produk Kami
+    <section className="space-y-6">
+      {/* Section Header */}
+      <div className="text-center">
+        <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
+          Menu Kami
         </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Produk alami yang dipilih dengan cermat untuk gaya hidup sehat Anda
+        <p className="mt-2 text-gray-600 text-base max-w-xl mx-auto">
+          Pilihan makanan sehat dan lezat untuk hari Anda
         </p>
       </div>
 
-      {/* Category Filter */}
-      <div className="flex flex-wrap justify-center gap-3">
+      {/* Category Filters */}
+      <div className="flex flex-wrap justify-center gap-2">
         {categories.map((category) => {
-          const isActive = selectedCategories.includes(category);
+          const isSelected = selectedCategories.includes(category);
           return (
             <button
               key={category}
-              onClick={() => toggleCategory(category)}
-              className={`px-6 py-3 rounded-full text-lg font-medium transition-all duration-200 min-h-[48px] ${
-                isActive
-                  ? "bg-orange-600 text-white shadow-lg"
-                  : "bg-white text-gray-700 border-2 border-gray-200 hover:border-orange-300 hover:bg-orange-50"
+              onClick={() => handleCategoryToggle(category)}
+              className={`px-5 py-2 rounded-lg font-medium text-base transition-colors duration-150 ${
+                isSelected
+                  ? "bg-orange-500 text-white shadow-md"
+                  : "bg-gray-50 text-gray-600 border border-gray-200 hover:bg-orange-100 hover:border-orange-400"
               }`}
-              aria-pressed={isActive}
+              aria-pressed={isSelected}
             >
               {category}
             </button>
           );
         })}
-        {/* Reset Button */}
         <button
           onClick={() => setSelectedCategories([])}
-          className="px-6 py-3 rounded-full text-lg font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200"
+          className="px-5 py-2 rounded-lg font-medium text-base bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors duration-150"
         >
-          Reset Filter
+          Hapus Filter
         </button>
       </div>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredProducts.map((product) => (
+      {/* Product Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {displayedProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

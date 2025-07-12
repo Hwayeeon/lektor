@@ -3,50 +3,52 @@ import { Shield, Truck, Heart, Clock } from "lucide-react";
 const badges = [
   {
     icon: Shield,
-    title: "Trusted Seller",
-    description: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    title: "Penjual Terpercaya",
+    description: "Kami menjamin kualitas dan keamanan setiap pesanan Anda.",
   },
   {
     icon: Truck,
-    title: "Fast Delivery",
-    description: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    title: "Pengiriman Cepat",
+    description: "Pesanan Anda tiba tepat waktu dengan layanan terpercaya.",
   },
   {
     icon: Heart,
-    title: "Family Business",
-    description: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    title: "Bisnis Keluarga",
+    description: "Dikelola dengan cinta dan dedikasi untuk kepuasan Anda.",
   },
   {
     icon: Clock,
-    title: "Quick Response",
-    description: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    title: "Respon Kilat",
+    description: "Tim kami siap membantu Anda dengan cepat dan ramah.",
   },
 ];
 
 export function TrustBadges() {
   return (
-    <section className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-      <div className="text-center space-y-4 mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-          Kenapa Memilih Kami?
+    <section className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+      {/* Section Header */}
+      <div className="text-center mb-6">
+        <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
+          Mengapa Pilih Kami?
         </h2>
-        <p className="text-lg text-gray-600">
-          Kepuasan Anda adalah prioritas kami
+        <p className="mt-2 text-base text-gray-600">
+          Kami berkomitmen untuk memberikan yang terbaik untuk Anda
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {badges.map((badge, index) => {
+      {/* Badges Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {badges.map((badge, idx) => {
           const Icon = badge.icon;
           return (
-            <div key={index} className="text-center space-y-3 p-4">
-              <div className="mx-auto w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center">
-                <Icon className="h-8 w-8 text-orange-600" />
+            <div key={idx} className="text-center p-3 space-y-2">
+              <div className="w-14 h-14 bg-orange-50 rounded-full mx-auto flex items-center justify-center">
+                <Icon className="w-7 h-7 text-orange-500" />
               </div>
-              <h3 className="font-bold text-gray-900 text-lg">{badge.title}</h3>
-              <p className="text-gray-600 leading-relaxed">
-                {badge.description}
-              </p>
+              <h3 className="font-medium text-gray-800 text-base">
+                {badge.title}
+              </h3>
+              <p className="text-sm text-gray-600">{badge.description}</p>
             </div>
           );
         })}

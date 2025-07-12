@@ -2,23 +2,26 @@ import { Phone, MapPin } from "lucide-react";
 
 export function Header() {
   return (
-    <header className="bg-white shadow-sm border-b-2 border-orange-200">
-      <div className="container mx-auto px-4 py-6">
-        <div className="text-center space-y-3">
+    <header className="bg-white border-b border-orange-200 shadow-sm">
+      <div className="container mx-auto px-6 py-8">
+        <div className="flex flex-col items-center text-center md:items-start md:text-left">
+          {/* Main title with bold styling for the brand */}
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
             PO Galang Dana
           </h1>
-          <p className="text-lg md:text-xl text-gray-700 font-medium">
-            Fresh, Natural Products Delivered to Your Door
+          <p className="mt-2 text-gray-600 text-base md:text-lg">
+            Fresh & healthy meals — ready for delivery or pickup at church
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-600 mt-4">
-            <div className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-orange-600" />
-              <span>Order Via WhatsApp</span>
+
+          {/* Contact and location info */}
+          <div className="mt-4 flex flex-col sm:flex-row gap-3 text-sm text-gray-700 justify-center md:justify-start">
+            <div className="flex items-center space-x-2">
+              <Phone className="w-4 h-4 text-orange-500" />
+              <span>Order via WhatsApp</span>
             </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-orange-600" />
-              <span>Ambil di gereja</span>
+            <div className="flex items-center space-x-2">
+              <MapPin className="w-4 h-4 text-orange-500" />
+              <span>Pick up at MBK Church</span>
             </div>
           </div>
         </div>

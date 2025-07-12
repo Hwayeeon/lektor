@@ -13,30 +13,33 @@ export function ContactSection() {
   };
 
   return (
-    <section className="bg-gradient-to-r from-orange-600 to-orange-700 rounded-2xl shadow-xl text-white p-8 md:p-12">
-      <div className="text-center space-y-6">
-        <h2 className="text-2xl md:text-3xl font-bold">Hubungi Kami</h2>
-        <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto">
-          Tim kami yang ramah siap membantu Anda dengan informasi produk, detail
-          pengiriman, atau pertanyaan lainnya.
+    <section className="bg-orange-700/95 rounded-xl text-white px-6 py-10 md:px-14 md:py-16 shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
+      <div className="max-w-3xl mx-auto text-center">
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
+          Ada Pertanyaan? Hubungi Kami
+        </h2>
+        <p className="text-base md:text-lg text-orange-100 mb-8">
+          Customer service kami siap membantu Anda setiap hari dari pukul 09.00
+          hingga 20.00. Jangan ragu untuk menghubungi kami melalui WhatsApp atau
+          email.
         </p>
 
         <button
           onClick={handleWhatsAppContact}
-          className="bg-white text-orange-600 hover:bg-gray-50 font-bold py-4 px-8 rounded-xl transition-all duration-200 flex items-center justify-center gap-3 text-lg mx-auto min-h-[56px] shadow-lg hover:shadow-xl"
+          className="bg-white text-orange-700 hover:bg-orange-100 transition duration-200 font-semibold px-6 py-3 md:py-4 md:px-8 rounded-lg inline-flex items-center gap-3 shadow-md hover:shadow-lg"
         >
-          <MessageCircle className="h-6 w-6" />
-          Hubungi via WhatsApp
+          <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
+          <span className="text-base md:text-lg">Chat via WhatsApp</span>
         </button>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8 text-sm opacity-90">
+        <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-sm text-orange-100/90">
           <div className="flex items-center gap-2">
-            <Phone className="h-4 w-4" />
-            <span>Biasanya merespon dalam 2-5 menit</span>
+            <Phone className="w-4 h-4 text-orange-200" />
+            <span>Respon cepat: 2-5 menit</span>
           </div>
           <div className="flex items-center gap-2">
-            <Mail className="h-4 w-4" />
-            <span>Tersedia 9 AM - 8 PM setiap hari</span>
+            <Mail className="w-4 h-4 text-orange-200" />
+            <span>Jam Operasional: 09.00 - 20.00 WIB</span>
           </div>
         </div>
       </div>
